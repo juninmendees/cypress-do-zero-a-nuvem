@@ -21,12 +21,27 @@ it ('preenche os campos obrigatórios e envia o formulário', () => {
   .type('Mendes de Almeida Junior')
   cy.get('@campoSobrenome')
   .should('have.value', 'Mendes de Almeida Junior')
-//todo: implementar aqui os demais campos obrigatorios
+
   cy.get('#email')
   .as('campoEmail')
   .type('juniormendesjp@gmail.com')
   cy.get('@campoEmail')
   .should('have.value', 'juniormendesjp@gmail.com')
+
+  cy.get('#product')
+  .select('blog')
+  cy.get('@campoEmail')
+  .should('have.value', 'juniormendesjp@gmail.com')
+
+  cy.get(':nth-child(4) > input')
+  .check()
+
+  cy.get('#email-checkbox')
+  .check()
+
+  cy.get('#open-text-area')
+  .type('Parabéns pelo formulário',{delay:0})
+
   cy.get('.button[type="submit"]')
   .click()
   cy.get('.success')
@@ -41,6 +56,12 @@ it('exibe mensagem de erro ao submeter o formulário com um email com formataç�
   cy.get('.error > strong')
   .should('be.visible', 'Central de Atendimento ao Cliente TAT')
 })
+
+
+it.only('valida caracteres não numéricos no telefone', () => {
+  cy.get('#phone')
+})
+
 
 //https://github.com/juninmendees/cypress-do-zero-a-nuvem/blob/main/lessons/02.md
 //https://docs.cypress.io/api/commands/type
